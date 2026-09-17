@@ -1,0 +1,408 @@
+/* ==============================================================================
+   CASAVIVA - SISTEMA DE DISEÑO EDITORIAL Y CALIDEZ CONTEMPORÁNEA
+   ============================================================================== */
+
+:root {
+  /* Paleta Editorial CasaViva */
+  --cv-bg-main: #FAF8F5;
+  --cv-bg-surface: #FFFFFF;
+  --cv-bg-warm: #F4EFE6;
+  --cv-bg-sand: #EAE4D9;
+  --cv-bg-subtle: #F0ECE4;
+
+  --cv-text-main: #20201E;
+  --cv-text-muted: #5E5D59;
+  --cv-text-light: #8E8B83;
+  --cv-border: #E5DFC5;
+  --cv-border-subtle: #EBE6DC;
+
+  --cv-primary: #53634B;        /* Verde oliva / salvia profundo */
+  --cv-primary-hover: #404E39;
+  --cv-primary-light: #EBF0E9;
+  --cv-primary-border: #CBD8C6;
+
+  --cv-accent: #C45E3D;         /* Terracota cálido para ofertas y llamadas a la acción */
+  --cv-accent-hover: #A84E31;
+  --cv-accent-light: #FAECE7;
+
+  --cv-gold: #C2A36B;
+  --cv-dark: #191918;
+
+  /* Sombras suaves y difusas */
+  --cv-shadow-sm: 0 2px 8px rgba(32, 32, 30, 0.04);
+  --cv-shadow-md: 0 8px 24px rgba(32, 32, 30, 0.07);
+  --cv-shadow-lg: 0 16px 36px rgba(32, 32, 30, 0.1);
+  --cv-shadow-hover: 0 12px 30px rgba(83, 99, 75, 0.12);
+
+  /* Radios */
+  --cv-radius-sm: 4px;
+  --cv-radius-md: 8px;
+  --cv-radius-lg: 14px;
+  --cv-radius-xl: 24px;
+  --cv-radius-full: 9999px;
+
+  /* Tipografías */
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --header-height: 80px;
+}
+
+/* Reset básico y accesibilidad */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--cv-bg-main);
+  color: var(--cv-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+  background-color: var(--cv-bg-main);
+  overflow-x: hidden;
+}
+
+/* Tipografías utilitarias */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, .editorial-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--cv-text-main);
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Focus visible para accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--cv-primary);
+  outline-offset: 3px;
+}
+
+/* Layout utilities */
+.cv-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 768px) {
+  .cv-container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+.cv-section {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+@media (min-width: 1024px) {
+  .cv-section {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+
+/* Botones con estilo CasaViva */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--cv-primary);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: var(--cv-radius-md);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--cv-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(83, 99, 75, 0.25);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--cv-bg-surface);
+  color: var(--cv-text-main);
+  border: 1px solid var(--cv-border);
+  padding: 12px 24px;
+  border-radius: var(--cv-radius-md);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--cv-bg-warm);
+  border-color: var(--cv-primary);
+  color: var(--cv-primary);
+}
+
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--cv-accent);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: var(--cv-radius-md);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-accent:hover:not(:disabled) {
+  background-color: var(--cv-accent-hover);
+  box-shadow: 0 4px 12px rgba(196, 94, 61, 0.25);
+}
+
+/* Badges de estado */
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--cv-radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badge-nuevo {
+  background-color: #E8F0FE;
+  color: #1967D2;
+}
+
+.badge-oferta {
+  background-color: var(--cv-accent-light);
+  color: var(--cv-accent);
+}
+
+.badge-seleccion {
+  background-color: var(--cv-primary-light);
+  color: var(--cv-primary);
+}
+
+.badge-mas-vendido {
+  background-color: #FEF3D6;
+  color: #B26A00;
+}
+
+.badge-agotado {
+  background-color: #F1F1F1;
+  color: #888888;
+}
+
+/* Formularios e Inputs */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--cv-text-main);
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--cv-border);
+  border-radius: var(--cv-radius-md);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  color: var(--cv-text-main);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--cv-primary);
+  box-shadow: 0 0 0 3px rgba(83, 99, 75, 0.12);
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Tarjetas */
+.cv-card {
+  background-color: var(--cv-bg-surface);
+  border-radius: var(--cv-radius-lg);
+  border: 1px solid var(--cv-border-subtle);
+  box-shadow: var(--cv-shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.cv-card:hover {
+  box-shadow: var(--cv-shadow-hover);
+  border-color: var(--cv-primary-border);
+}
+
+/* Hotspots de Sala Interactiva */
+.hotspot-point {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid var(--cv-primary);
+  box-shadow: 0 0 0 4px rgba(83, 99, 75, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+  z-index: 20;
+}
+
+.hotspot-point::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--cv-primary);
+  transition: transform 0.2s ease;
+}
+
+.hotspot-point:hover, .hotspot-point.active {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 8px rgba(83, 99, 75, 0.35);
+}
+
+.hotspot-card {
+  position: absolute;
+  width: 280px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--cv-border);
+  border-radius: var(--cv-radius-md);
+  padding: 14px;
+  box-shadow: var(--cv-shadow-lg);
+  z-index: 30;
+  animation: fadeInPop 0.25s ease forwards;
+}
+
+@keyframes fadeInPop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Chatbot flotante con tamaño fijo */
+.chatbot-window {
+  width: 360px;
+  height: 520px;
+  max-height: calc(100vh - 100px);
+  background-color: var(--cv-bg-surface);
+  border-radius: var(--cv-radius-lg);
+  box-shadow: var(--cv-shadow-lg);
+  border: 1px solid var(--cv-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  animation: slideUpChat 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpChat {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .chatbot-window {
+    width: calc(100vw - 32px);
+    right: 16px;
+    bottom: 16px;
+    height: 480px;
+  }
+}
+
+/* Animaciones suaves */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
