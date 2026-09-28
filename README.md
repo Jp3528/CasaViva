@@ -1,6 +1,6 @@
 # CasaViva
 
-![Vista previa de CasaViva](docs/preview.svg)
+![Vista previa de CasaViva](docs/preview.png)
 
 Sistema web e-commerce para productos de hogar, construido con React, TypeScript, Vite, Node.js, Express y PostgreSQL. Incluye catalogo, carrito, checkout, cuentas de usuario, cupones, panel administrativo y asistente virtual.
 
