@@ -19,5 +19,9 @@
     "typecheck:server": "npm --prefix server run typecheck",
     "typecheck:client": "npm --prefix client run typecheck",
     "lint": "echo Lint check passed for CasaViva codebase"
+  },
+  "optionalDependencies": {
+    "@esbuild/linux-x64": "^0.25.12",
+    "@rollup/rollup-linux-x64-gnu": "^4.63.3"
   }
 }
