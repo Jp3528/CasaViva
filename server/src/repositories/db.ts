@@ -144,8 +144,21 @@ class DataManager {
   }
 
   private async initPostgres(): Promise<void> {
-    const connectionString = process.env.DATABASE_URL || 
-      `postgresql://${process.env.PGUSER || 'postgres'}:${process.env.PGPASSWORD || 'postgres'}@${process.env.PGHOST || 'localhost'}:${process.env.PGPORT || '5432'}/${process.env.PGDATABASE || 'casaviva'}`;
+    const hasPgEnv = Boolean(
+      process.env.PGHOST ||
+      process.env.PGUSER ||
+      process.env.PGPASSWORD ||
+      process.env.PGDATABASE
+    );
+    const connectionString = process.env.DATABASE_URL ||
+      (hasPgEnv
+        ? `postgresql://${process.env.PGUSER || 'postgres'}:${process.env.PGPASSWORD || 'postgres'}@${process.env.PGHOST || 'localhost'}:${process.env.PGPORT || '5432'}/${process.env.PGDATABASE || 'casaviva'}`
+        : '');
+
+    if (!connectionString) {
+      console.log('ℹ️ DATABASE_URL no configurada. Usando datos demo en memoria.');
+      return;
+    }
 
     try {
       this.pool = new Pool({

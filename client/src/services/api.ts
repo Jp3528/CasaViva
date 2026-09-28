@@ -14,6 +14,11 @@ export async function apiRequest<T = any>(endpoint: string, options: RequestInit
       headers,
     });
 
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.toLowerCase().includes('application/json')) {
+      throw new Error('La API no respondió correctamente. Revisa la configuración de Vercel.');
+    }
+
     const data = await response.json();
 
     if (!response.ok) {

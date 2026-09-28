@@ -24,12 +24,9 @@ Sistema web e-commerce para productos de hogar, construido con React, TypeScript
 
 ## Ejecutar localmente
 
-Instala dependencias del servidor y cliente:
+Instala dependencias desde la raiz:
 
 ```bash
-cd server
-npm install
-cd ../client
 npm install
 ```
 
@@ -58,6 +55,28 @@ JWT_SECRET=cambia-este-valor-en-tu-entorno-local
 ```
 
 En produccion `JWT_SECRET` es obligatorio. En desarrollo existe un valor demo para facilitar pruebas locales.
+
+## Despliegue en Vercel
+
+El repositorio incluye `vercel.json` y `api/[...path].ts` para publicar el frontend Vite de `client/dist` junto con la API Express como Vercel Function.
+
+Configuracion recomendada en Vercel:
+
+```txt
+Framework Preset: Vite
+Build Command: npm --prefix client run build
+Output Directory: client/dist
+Install Command: npm install
+```
+
+Para una demo publica puedes desplegar sin `DATABASE_URL`; la API usa datos demo en memoria. Para persistencia real, agrega en Vercel:
+
+```env
+DATABASE_URL=postgresql://...
+JWT_SECRET=valor-largo-y-privado
+```
+
+No subas `.env` ni claves reales al repositorio.
 
 ## Cuentas demo
 
