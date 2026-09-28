@@ -4,7 +4,13 @@ import { userRepository } from '../repositories/userRepository';
 import { subscriberRepository } from '../repositories/subscriberRepository';
 import { User } from '../models/types';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'casaviva-demo-secret-change-me';
+const getJwtSecret = (): string => {
+  if (process.env.JWT_SECRET) return process.env.JWT_SECRET;
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('JWT_SECRET must be configured in production');
+  }
+  return 'casaviva-demo-secret-change-me';
+};
 
 export class AuthService {
   public async register(data: { nombre: string; email: string; password: string; telefono?: string }): Promise<{ user: Omit<User, 'password_hash'>; token: string }> {
@@ -78,14 +84,14 @@ export class AuthService {
   public generateToken(user: User): string {
     return jwt.sign(
       { id: user.id, email: user.email, rol: user.rol, nombre: user.nombre },
-      JWT_SECRET,
+      getJwtSecret(),
       { expiresIn: '7d' }
     );
   }
 
   public verifyToken(token: string): any {
     try {
-      return jwt.verify(token, JWT_SECRET);
+      return jwt.verify(token, getJwtSecret());
     } catch {
       return null;
     }
