@@ -1,119 +1,137 @@
-# CasaViva
+# CasaViva | Home Goods E-commerce
 
-![Vista previa de CasaViva](docs/preview.png)
+[Español](#espanol) · [English](#english)
 
-Sistema web e-commerce para productos de hogar, construido con React, TypeScript, Vite, Node.js, Express y PostgreSQL. Incluye catalogo, carrito, checkout, cuentas de usuario, cupones, panel administrativo y asistente virtual.
+[Demo](https://casaviva-puce.vercel.app) · [GitHub](https://github.com/Jp3528/CasaViva)
 
-## Funcionalidades
+![Vista previa / Preview — CasaViva | Home Goods E-commerce](docs/preview.png)
 
-- Catalogo de productos con categorias, variantes y reseñas.
-- Carrito, checkout por pasos y generacion de pedido.
-- Registro, inicio de sesion y perfil de usuario.
-- Panel administrativo para revisar productos, pedidos y ventas.
-- Cupones de descuento y suscripcion de clientes.
-- API REST en Express con estructura por modelos, repositorios, servicios, controladores y rutas.
-- Persistencia PostgreSQL con fallback local para facilitar la demo.
+<a id="espanol"></a>
 
-## Stack
+## Español
 
-- React + TypeScript + Vite
-- Node.js + Express + TypeScript
-- PostgreSQL
-- Vitest
-- CSS modular por sistema de diseño
+### Descripción
 
-## Ejecutar localmente
+Aplicación web de comercio electrónico para productos de hogar. Integra una tienda en React con una API Express organizada en controladores, servicios y repositorios, y permite explorar el flujo de compra con datos de demostración o PostgreSQL.
 
-Instala dependencias desde la raiz:
+### Funcionalidades
+
+- Catálogo con categorías, variantes de producto y reseñas.
+- Carrito, cupones y checkout por pasos con creación de pedidos.
+- Registro, autenticación y perfil de cliente.
+- Vistas administrativas de productos, pedidos y ventas.
+- Asistente de consultas sobre la tienda.
+
+### Tecnologías
+
+React 18 · TypeScript · Vite · Node.js · Express · PostgreSQL · Vitest
+
+### Ejecutar localmente
+
+**Requisitos:** Node.js 22 y npm; PostgreSQL si deseas persistencia entre reinicios.
 
 ```bash
-npm install
+git clone https://github.com/Jp3528/CasaViva.git
+cd CasaViva
 ```
 
-Desde la raiz del proyecto:
+```bash
+npm ci
+```
+
+**Configuración.** La demo usa datos en memoria cuando PostgreSQL no está disponible. Para conectarlo, crea `server/.env` a partir de [`server/.env.example`](server/.env.example) y configura `DATABASE_URL`, `PORT` y un `JWT_SECRET` privado. La API carga dotenv desde el directorio `server`.
 
 ```bash
 npm run dev
 ```
 
-Servicios locales:
+Tienda: `http://localhost:5173`. API: `http://localhost:4000`. Salud: `http://localhost:4000/api/health`. Las cuentas semilla incluyen `admin@casaviva.pe` / `Admin2026*CV` y `maria.lopez@ejemplo.com` / `Cliente123*`; son exclusivamente de demostración.
 
-```txt
-Backend:  http://localhost:4000
-Frontend: http://localhost:5173
-Health:   http://localhost:4000/api/health
-```
-
-## Variables de entorno
-
-Copia `server/.env.example` como `server/.env` y ajusta los valores:
-
-```env
-DATABASE_URL=postgresql://usuario:clave@localhost:5432/casaviva
-PORT=4000
-JWT_SECRET=cambia-este-valor-en-tu-entorno-local
-```
-
-En produccion `JWT_SECRET` es obligatorio. En desarrollo existe un valor demo para facilitar pruebas locales.
-
-## Despliegue en Vercel
-
-El repositorio incluye `vercel.json` y `api/[...path].ts` para publicar el frontend Vite de `client/dist` junto con la API Express como Vercel Function.
-
-Configuracion recomendada en Vercel:
-
-```txt
-Framework Preset: Vite
-Build Command: npm --prefix client run build
-Output Directory: client/dist
-Install Command: npm install
-```
-
-Para una demo publica puedes desplegar sin `DATABASE_URL`; la API usa datos demo en memoria. Para persistencia real, agrega en Vercel:
-
-```env
-DATABASE_URL=postgresql://...
-JWT_SECRET=valor-largo-y-privado
-```
-
-No subas `.env` ni claves reales al repositorio.
-
-## Cuentas demo
-
-```txt
-Administrador
-Email: admin@casaviva.pe
-Clave: Admin2026*CV
-
-Cliente
-Email: maria.lopez@ejemplo.com
-Clave: Cliente123*
-```
-
-Cupones disponibles:
-
-```txt
-CASAVIVA10
-BIENVENIDO15
-HOGAR2026
-```
-
-## Validacion
+### Comprobaciones
 
 ```bash
 npm run typecheck
-npm run test
+npm test
 npm run build
 ```
 
-## Estructura
+Comandos disponibles para comprobar el proyecto en un entorno con sus dependencias instaladas.
 
-```txt
-server/   API Express, servicios, repositorios y datos
-client/   Aplicacion React, componentes, paginas y contextos
-docs/     Recursos visuales para GitHub
+### Estructura
+
+| Ruta                                                                       | Contenido                                         |
+| -------------------------------------------------------------------------- | ------------------------------------------------- |
+| [`client/`](client/)                                                       | Interfaz, páginas, componentes y contextos React. |
+| [`server/src/`](server/src/)                                               | API, lógica de negocio y acceso a datos.          |
+| [`server/src/repositories/schema.sql`](server/src/repositories/schema.sql) | Esquema de PostgreSQL.                            |
+| [`api/`](api/)                                                             | Entradas de API para Vercel.                      |
+
+### Alcance
+
+Proyecto de portafolio con pagos simulados. El modo en memoria pierde cambios al reiniciar y no sustituye una base persistente. El despliegue de Vercel está definido en `vercel.json`; para uso público con datos reales se deben configurar persistencia, secretos y permisos administrativos.
+
+---
+
+<a id="english"></a>
+
+## English
+
+### Overview
+
+A home goods e-commerce application combining a React storefront with an Express API organized into controllers, services and repositories. The shopping flow can be explored with demo data or PostgreSQL.
+
+### Features
+
+- Catalog with categories, product variants and reviews.
+- Cart, coupons and step-by-step checkout with order creation.
+- Registration, authentication and customer profiles.
+- Administrative views for products, orders and sales.
+- A store information assistant.
+
+### Technology
+
+React 18 · TypeScript · Vite · Node.js · Express · PostgreSQL · Vitest
+
+### Run locally
+
+**Requirements:** Node.js 22 and npm; PostgreSQL if you need data to persist across restarts.
+
+```bash
+git clone https://github.com/Jp3528/CasaViva.git
+cd CasaViva
 ```
 
-## Enfoque de portafolio
+```bash
+npm ci
+```
 
-CasaViva demuestra una aplicacion full-stack con separacion de responsabilidades, UI responsive, flujo de compra, autenticacion, persistencia y pruebas. Para produccion se recomienda conectar PostgreSQL real, rotar `JWT_SECRET`, endurecer roles administrativos y configurar despliegue con variables de entorno privadas.
+**Configuration.** The demo uses in-memory data when PostgreSQL is unavailable. To connect a database, create `server/.env` from [`server/.env.example`](server/.env.example) and set `DATABASE_URL`, `PORT` and a private `JWT_SECRET`. The API loads dotenv from the `server` directory.
+
+```bash
+npm run dev
+```
+
+Storefront: `http://localhost:5173`. API: `http://localhost:4000`. Health: `http://localhost:4000/api/health`. Seed accounts include `admin@casaviva.pe` / `Admin2026*CV` and `maria.lopez@ejemplo.com` / `Cliente123*`; these are demo credentials only.
+
+### Checks
+
+```bash
+npm run typecheck
+npm test
+npm run build
+```
+
+Available commands for checking the project in an environment with its dependencies installed.
+
+### Structure
+
+| Path                                                                       | Contents                                  |
+| -------------------------------------------------------------------------- | ----------------------------------------- |
+| [`client/`](client/)                                                       | React UI, pages, components and contexts. |
+| [`server/src/`](server/src/)                                               | API, business logic and data access.      |
+| [`server/src/repositories/schema.sql`](server/src/repositories/schema.sql) | PostgreSQL schema.                        |
+| [`api/`](api/)                                                             | API entry points for Vercel.              |
+
+### Scope
+
+A portfolio project with simulated payments. In-memory mode loses changes on restart and does not replace persistent storage. Vercel deployment is defined in `vercel.json`; public use with real data requires persistent storage, private secrets and administrative access controls.
